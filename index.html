@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 {
+            color: darkblue;
+            margin-bottom: 30px;
+        }
+        .number-container {
+            display: inline-block;
+            border: 1px solid black;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            margin-right: 5px;
+        }
+        .container {
+            margin-bottom: 20px;
+        }
+        button {
+            margin-right: 10px;
+        }
+        #result {
+            margin-bottom: 20px;
+        }
+        #good-luck {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+    </style>
+    <script>
+        function getRandomNumber(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        function generateNumbers() {
+            let numbers = new Set();
+            while (numbers.size < 6) {
+                numbers.add(getRandomNumber(1, 60));
+            }
+            return Array.from(numbers).sort((a, b) => a - b);
+        }
+
+        function displayNumbers() {
+            const resultContainer = document.getElementById('result');
+            resultContainer.innerHTML = '';
+            const numbers = generateNumbers();
+            numbers.forEach(number => {
+                const numberElement = document.createElement('div');
+                numberElement.className = 'number-container';
+                numberElement.textContent = number;
+                resultContainer.appendChild(numberElement);
+            });
+        }
+
+        function clearNumbers() {
+            const resultContainer = document.getElementById('result');
+            resultContainer.innerHTML = '';
+        }
+    </script>
+</head>
+<body>
+    <h1>Sorteio dos Números da Mega Sena</h1>
+    <div class="container">
+        <button onclick="displayNumbers()">Sortear</button>
+        <button onclick="clearNumbers()">Limpar</button>
+    </div>
+    <div id="result"></div>
+    <div id="good-luck">
+        Boa sorte!
+    </div>
+</body>
+</html>
